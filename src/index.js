@@ -10,7 +10,7 @@ if (!process.env.PORT) {
 const PORT = process.env.PORT;
 
 app.get("/video", async (req, res) => {
-    const path = "../videos/rabit.mp4";
+    const path = "./videos/rabit.mp4";
     const stats = await fs.promises.stat(path);
 
     res.writeHead(200, {
