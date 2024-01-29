@@ -38,3 +38,8 @@ app.listen(PORT, () => {
     console.log('Microservice online');
 });
 
+// Besides, we haven’t learned anything about Kubernetes yet, so we definitely couldn’t have used Kubernetes volumes at this point in the book. 
+// However, there’s another important reason why I generally choose to use cloud storage over cluster storage.
+// We could store the files and data for our application in the Kubernetes cluster, but I prefer my production cluster to be stateless. 
+// That means I can destroy and rebuild the cluster at will without risk of losing the data. Later, this enables us to use blue-green deployment for our production rollouts, which we’ll talk about in chapter 12. 
+// This makes it easy to build a new and updated instance of our application that runs in parallel with the previous version.
