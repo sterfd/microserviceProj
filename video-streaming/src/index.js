@@ -54,15 +54,22 @@ async function main() {
     // const videosCollection = db.collection("videos");
 
     console.log(`Connecting to RabbitMQ server at ${RABBIT}.`);
-    const messagingConnection = await amqp.connect(RABBIT);
+    const messagingConnection = await amqp.connect(RABBIT);         //connect to server
     console.log("Connected to RabbitMQ");
-    const messageChannel = await messagingConnection.createChannel();
+    const messageChannel = await messagingConnection.createChannel();       //create messaging channel
+    await messageChannel.assertExchange("viewed", "fanout");        //asserts viewed exchange  fanning out to all queues
+    // function sendViewedMessage(messageChannel, videoPath) {
+    //     console.log('Publishing message on "viewed" queue.');
+    //     const msg = { videoPath: videoPath };
+    //     const jsonMsg = JSON.stringify(msg);
+    //     messageChannel.publish("", "viewed", Buffer.from(jsonMsg));      //publishes message to viewed queue
+    // }
 
-    function sendViewedMessage(messageChannel, videoPath) {
-        console.log('Publishing message on "viewed" queue.');
+    function broadcastViewedMessage(messageChannel, videoPath) {
+        console.log('Publishing message on "viewed" exchange.');
         const msg = { videoPath: videoPath };
         const jsonMsg = JSON.stringify(msg);
-        messageChannel.publish("", "viewed", Buffer.from(jsonMsg));
+        messageChannel.publish("viewed", "", Buffer.from(jsonMsg));     //publishes message to viewed exchange instead of qeuue
     }
 
     const app = express();
@@ -103,7 +110,8 @@ async function main() {
         fs.createReadStream(videoPath).pipe(res);
 
         // sendViewedMessage(videoPath);            #HTTP post
-        sendViewedMessage(messageChannel, videoPath);
+        // sendViewedMessage(messageChannel, videoPath);        //sends viewed message 
+        broadcastViewedMessage(messageChannel, videoPath);
     });
 
     //
