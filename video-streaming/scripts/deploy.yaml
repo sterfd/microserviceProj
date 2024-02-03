@@ -14,8 +14,10 @@ spec:
     spec:
       containers:
       - name: video-streaming
-        image: video-streaming:1
-        imagePullPolicy: Never    #dont find the image online, its local
+      # image: video-streaming:1
+        image: nkmt1.azurecr.io/video-streaming:1
+        # imagePullPolicy: Never        #dont find the image online, its local
+        imagePullPolicy: IfNotPresent    #if not in cluster, pull from container registry (get to cluster this way initially)
         env:
         - name: PORT
           value: "4000"
@@ -28,9 +30,10 @@ metadata:
 spec:
   selector: 
     app: video-streaming      #connected to the pod
-  type: NodePort            # default is clusterIP which is only available within cluster
+  # type: NodePort      # default is clusterIP which is only available within cluster
+  type: LoadBalancer             #allocate an IP so we can access MS from outside
   ports:
     - protocol: TCP
       port: 80
       targetPort: 4000
-      nodePort: 30000       # choose port in range 30000-32767
+      # nodePort: 30000       # choose port in range 30000-32767

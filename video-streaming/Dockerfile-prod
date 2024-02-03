@@ -1,4 +1,6 @@
-FROM node:18.5.0-alpine
+# FROM node:18.5.0-alpine
+FROM --platform=linux/amd64 node:18.5.0-alpine      
+#uhhh hope this doesnt take up much space
 
 WORKDIR /usr/src/app
 COPY package*.json ./
