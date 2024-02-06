@@ -15,9 +15,9 @@ spec:
       containers:
       - name: video-streaming
       # image: video-streaming:1
-        image: nkmt1.azurecr.io/video-streaming:1
+        image: nkmt1.azurecr.io/video-streaming:3
         # imagePullPolicy: Never        #dont find the image online, its local
-        imagePullPolicy: IfNotPresent    #if not in cluster, pull from container registry (get to cluster this way initially)
+        imagePullPolicy: Always       #ALWAYS DO ALWAYS #IfNotPresent    #if not in cluster, pull from container registry (get to cluster this way initially)
         env:
         - name: PORT
           value: "4000"
