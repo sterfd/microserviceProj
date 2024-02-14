@@ -131,6 +131,10 @@ const PORT = process.env.PORT;
 
 const app = express();
 
+app.get("/live", (req, res) => {
+    res.sendStatus(200);
+});
+
 app.get("/video", async (req, res) => {
     const videoPath = "./videos/rabit.mp4";
     const stats = await fs.promises.stat(videoPath);
@@ -143,7 +147,13 @@ app.get("/video", async (req, res) => {
 });
 
 
-app.listen(PORT, () => {
-    console.log('Microservice online.');
-});
-
+if (require.main === module) {
+    // if app running as entry point
+    app.listen(PORT, () => {
+        console.log('Microservice online.');
+    });
+} else {
+    module.exports = {  // export express object for tests
+        app,
+    };
+}
