@@ -15,7 +15,7 @@ jobs:
 
     - uses: actions/setup-node@v3   # installs node for workflow
       with:
-        node-version: 18.x
+        node-version: 20.x
         cache: 'npm'
 
     - run: npm ci     #this is the CI pipeline command
