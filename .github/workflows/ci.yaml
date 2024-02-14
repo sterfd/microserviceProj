@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: 20.x
         cache: 'npm'
-        cache-dependency-path: ./package-lock.json
+        cache-dependency-path: '**/package-lock.json'
 
     - run: npm ci     #this is the CI pipeline command
     - run: npm test   #automated test - came from template - next chapter shows how to implement
