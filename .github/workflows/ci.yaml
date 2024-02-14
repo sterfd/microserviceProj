@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3   # installs node for workflow
+      with:
+        node-version: 18.x
+        cache: 'npm'
+
+    - run: npm ci     #this is the CI pipeline command
+    - run: npm test   #automated test - came from template - next chapter shows how to implement
