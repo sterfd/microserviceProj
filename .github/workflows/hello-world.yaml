@@ -1,6 +1,6 @@
 name: Hello world
 
-on:
+on:   #how this workflow can be triggered (git push or from UI)
   push:
   
   workflow_dispatch:
