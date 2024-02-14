@@ -13,4 +13,4 @@ jobs:   #only one job specified here, can run in sequence/parallel
       - uses: actions/checkout@v3
 
       - name: Run the shell script   #could also have multiple iterations of name, run, run run commands in the workflow
-        ßrun: ./index.sh        #this run part is the line by line commands this action runs, could have done echo 'Hello world!' directly
+        run: ./index.sh        #this run part is the line by line commands this action runs, could have done echo 'Hello world!' directly
