@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: apps/v1 
 kind: Deployment
 metadata: 
   name: video-streaming       #naming hte pod
@@ -16,7 +16,7 @@ spec:
       - name: video-streaming
       # image: video-streaming:1
         # image: nkmt1.azurecr.io/video-streaming:3
-        image: $CONTAINER_REGISTRY.video-streaming/$VERSION   # set env variables that are put in with envsubst command line so these are not hardcoded in CD
+        image: $CONTAINER_REGISTRY/video-streaming:$VERSION   # set env variables that are put in with envsubst command line so these are not hardcoded in CD
         # imagePullPolicy: Never        #dont find the image online, its local
         imagePullPolicy: Always       #ALWAYS DO ALWAYS #IfNotPresent    #if not in cluster, pull from container registry (get to cluster this way initially)
         env:

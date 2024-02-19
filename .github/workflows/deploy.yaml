@@ -1,0 +1,43 @@
+name: deploy
+
+on:
+  push: 
+    branches:
+      - master
+    paths:
+      - video-streaming/**
+  
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: video-streaming
+
+
+# need to put our kubectl configs from cat ~/.kube/config into github secrets
+    env:
+      VERSION: ${{ github.sha }}    # represents hash of commit triggering workflow - this is a context varaiable
+      CONTAINER_REGISTRY: $ {{ secrets. CONTAINER_REGISTRY }}
+      REGISTRY_UN: {{ secrets.REGISTRY_UN }}
+      REGISTRY_PW: {{ secrets.REGISTRY_PW }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build
+        run: ./scripts/build-image.sh
+
+      - name: Publish
+        run: ./scripts/push-image.sh
+# installing and oncfiguring kubectl so it can run in workfloww - ccustom action
+# extracts kubectl config from the github secret 
+      - name: tale/kubectl-action@v1
+        with:   
+          base64-kube-config: $ {{ secrets.KUBE_CONFIG }}
+          kubectl-vsion: v1.24.2
+
+      - name: Deploy
+        run: ./scripts/deploy.sh
