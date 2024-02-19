@@ -1,1 +1,1 @@
-envsubst < ./scripts/kubernetes/deploy.yaml | kubectl delete -f -
+envsubst < ./scripts/kubernetes/deploy.yaml | kubectl delete -f - 

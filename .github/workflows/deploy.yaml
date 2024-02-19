@@ -25,15 +25,16 @@ jobs:
       REGISTRY_PW: {{ secrets.REGISTRY_PW }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3 
 
       - name: Build
         run: ./scripts/build-image.sh
 
       - name: Publish
         run: ./scripts/push-image.sh
-# installing and oncfiguring kubectl so it can run in workfloww - ccustom action
-# extracts kubectl config from the github secret 
+          # installing and oncfiguring kubectl so it can run in workfloww - ccustom action
+          # extracts kubectl config from the github secret 
+
       - name: tale/kubectl-action@v1
         with:   
           base64-kube-config: $ {{ secrets.KUBE_CONFIG }}

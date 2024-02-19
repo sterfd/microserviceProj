@@ -1,16 +1,15 @@
-# name: Hello world
+name: Hello world
 
-# on:   #how this workflow can be triggered (git push or from UI )
-#   push:
+on:   
   
-#   workflow_dispatch:
+  workflow_dispatch:
 
-# jobs:   #only one job specified here, can run in sequence/parallel
-#   hello-world:
-#     runs-on: ubuntu-latest
+jobs:   #only one job specified here, can run in sequence/parallel
+  hello-world:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-#       - name: Run the shell script   #could also have multiple iterations of name, run, run run commands in the workflow
-#         run: ./index.sh        #this run part is the line by line commands this action runs, could have done echo 'Hello world!' directly
+      - name: Run the shell script   #could also have multiple iterations of name, run, run run commands in the workflow
+        run: ./index.sh        #this run part is the line by line commands this action runs, could have done echo 'Hello world!' directly
