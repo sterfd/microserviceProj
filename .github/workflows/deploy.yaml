@@ -19,10 +19,11 @@ jobs:
 
 # need to put our kubectl configs from cat ~/.kube/config into github secrets
     env:
-      VERSION: ${{ github.sha }}    # represents hash of commit triggering workflow - this is a context varaiable
-      CONTAINER_REGISTRY: $ {{ secrets.CONTAINER_REGISTRY }}
+      # VERSION: ${{ github.sha }}    # represents hash of commit triggering workflow - this is a context varaiable
+      VERSION: ${{ github.sha }}
+      CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
       REGISTRY_UN: ${{ secrets.REGISTRY_UN }}
-      REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
+      REGISTRY_PW: ${{ secrets.REGISTRY_PW  }}
 
     steps:
       - uses: actions/checkout@v4 
