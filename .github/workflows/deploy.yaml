@@ -21,8 +21,8 @@ jobs:
     env:
       VERSION: ${{ github.sha }}    # represents hash of commit triggering workflow - this is a context varaiable
       CONTAINER_REGISTRY: $ {{ secrets. CONTAINER_REGISTRY }}
-      REGISTRY_UN: {{ secrets.REGISTRY_UN }}
-      REGISTRY_PW: {{ secrets.REGISTRY_PW }}
+      REGISTRY_UN: ${{ secrets.REGISTRY_UN }}
+      REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
 
     steps:
       - uses: actions/checkout@v3 
