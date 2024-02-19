@@ -1,1 +1,1 @@
-docker build -t $CONTAINER_REGISTRY/video-streaming:$VERSION --file ./Dockerfile-prod .
+docker buildx build -t $CONTAINER_REGISTRY/video-streaming:$VERSION --file ./Dockerfile-prod .
