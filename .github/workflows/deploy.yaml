@@ -1,11 +1,11 @@
 name: deploy
 
 on:
-  push: 
-    branches:
-      - master
-    paths:
-      - video-streaming/**
+  # push: 
+  #   branches:
+  #     - master
+  #   paths:
+  #     - video-streaming/**
   
   workflow_dispatch:
 
