@@ -4,7 +4,7 @@ services:
     image: mongo:7.0.0
     container_name: db
     ports:
-      - "27017:27107"
+      - "27017:27017"
     expose:
-      - "27107"
+      - "27017"
     restart: always
