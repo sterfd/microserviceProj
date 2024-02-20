@@ -1,0 +1,10 @@
+version: "3"
+services:
+  db:
+    image: mongo:7.0.0
+    container_name: db
+    ports:
+      - "27017:27107"
+    expose:
+      - "27107"
+    restart: always
